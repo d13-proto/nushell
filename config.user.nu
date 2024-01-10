@@ -16,8 +16,8 @@ def upgrade-nu-config [] {
     )
 
     # 备份旧版本配置
-    mv -v $"($configPath)/config.nu" $"($configPath)/old_versions/config-($version).nu"
-    mv -v $"($configPath)/env.nu" $"($configPath)/old_versions/env-($version).nu"
+    mv -vf $"($configPath)/config.nu" $"($configPath)/old_versions/config-($version).nu"
+    mv -vf $"($configPath)/env.nu" $"($configPath)/old_versions/env-($version).nu"
 
     # 生成新版本配置
     config reset --without-backup
