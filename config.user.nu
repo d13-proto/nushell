@@ -6,24 +6,31 @@ use themes/google-light.nu
 source alias.nu
 source function.nu
 
-# 更新 Nushell 配置版本
+# 更新 Nushell 配置
 def upgrade-nu-config [] {
     let configPath = $nu.config-path | path dirname
-    let version = (
-        open $"($configPath)/config.nu"
+    let configFile = $configPath | path join config.nu
+    let oldVersion = (
+        open $configFile
         | parse -r 'version = "([\d\.]+)"'
         | get capture0.0
     )
+    if ($oldVersion | is-empty) {
+        error make {msg: '无法获取旧版本号'}
+    }
+    let configFileOld = $configPath | path join old_versions $"config-($oldVersion).nu"
+    let envFile = $configPath | path join env.nu
+    let envFileOld = $configPath | path join old_versions $"env-($oldVersion).nu"
 
-    # 备份旧版本配置
-    mv -vf $"($configPath)/config.nu" $"($configPath)/old_versions/config-($version).nu"
-    mv -vf $"($configPath)/env.nu" $"($configPath)/old_versions/env-($version).nu"
+    print '备份旧版本配置'
+    mv -f $configFile $configFileOld
+    mv -f $envFile $envFileOld
 
-    # 生成新版本配置
+    print '生成当前版本配置'
     config reset --without-backup
 
-    # 注入用户配置
-    $"\nsource ($configPath)/config.user.nu" | save -a $"($configPath)/config.nu"
+    print '注入用户配置'
+    $"\nsource ($configPath | path join config.user.nu)" | save -a $configFile
 
     # 顺便更新 Starship 配置
     starship init nu | save -f starship.nu
