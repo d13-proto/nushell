@@ -37,6 +37,7 @@ def upgrade-nu-config [] {
 }
 
 # Fish 自动完成
+# https://www.nushell.sh/cookbook/external_completers.html
 let fish_completer = {
 	|spans|
 	# if the current command is an alias, get it's expansion
@@ -52,13 +53,12 @@ let fish_completer = {
 	| $"value(char tab)description(char newline)" + $in
 	| from tsv --flexible --no-infer
 }
-# https://www.nushell.sh/cookbook/external_completers.html
 
 # 主题
+# https://www.nushell.sh/book/coloring_and_theming.html
 let theme = (google-light | merge-deep {
     separator: "black_dimmed"
 })
-# https://www.nushell.sh/book/coloring_and_theming.html
 
 # 修改快捷键
 let $keybindings = ($env.config.keybindings | each {

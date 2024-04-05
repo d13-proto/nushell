@@ -31,7 +31,7 @@ def video-trim [start: float, end: float=0., path: string='.'] {
                     | default 0.
                     | into float
                 )
-                # `default 0.` 防止 into float 不支持空字符串
+                # HACK `default 0.` 防止 into float 不支持空字符串
 
                 ['-to', ($duration - $end)]
 
@@ -94,7 +94,7 @@ def merge-deep [source: record] {
         return {key: $key, value: $value_merged}
 
     } | transpose -rd | into record)
-    # `into record` 防止 transpose 不把 empty list 转换成 record
+    # HACK `into record` 防止 transpose 不把 empty list 转换成 record
 
     # 合并
     return ($target | merge $source_all_merged)
