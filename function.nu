@@ -60,8 +60,8 @@ def video-trim [start: float, end: float=0., path: string='.'] {
 # 运行外部命令，返回码不为零时抛出错误
 def --wrapped run [command: string='', ...args] {
     $in | (
-        run-external --redirect-combine --trim-end-newline
-        $command ($args | flatten)
+        run-external
+        $command ...$args
         | complete
         | if $in.exit_code == 0 {
             $in.stdout
