@@ -30,10 +30,12 @@ def upgrade-nu-config [] {
     config reset --without-backup
 
     print '注入用户配置'
-    $"\nsource ($configPath | path join config.user.nu)" | save -a $configFile
+    $"source ($configPath | path join config.user.nu)\n" | save -a $configFile
 
     # 顺便更新 Starship 配置
     starship init nu | save -f starship.nu
+
+    print $"比较差异: git diff --no-index -w -- ($configFileOld) ($configFile)"
 }
 
 # Fish 自动完成
