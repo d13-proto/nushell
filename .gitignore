@@ -1,4 +1,3 @@
 history*
-config.nu
-env.nu
-starship.nu
+
+vendor/autoload/starship.nu
