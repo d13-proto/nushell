@@ -2,7 +2,7 @@
 
 "$schema" = "https://starship.rs/config-schema.json"
 
-format = """[╭──](#999999) $all $fill $cmd_duration$status$battery$memory_usage$time\
+format = """[╭──](#999999) $all$fill $cmd_duration$status$battery$memory_usage$time\
 $line_break[╰─](#999999)$character
 """
 
@@ -51,8 +51,8 @@ symbol = " "
 symbol = " "
 
 [directory]
-read_only = "󰌾"
-home_symbol = ""
+read_only = " 󰌾"
+home_symbol = " "
 
 [docker_context]
 symbol = " "
