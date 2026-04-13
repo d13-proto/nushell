@@ -4,10 +4,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "link_starship_config",
+            "label": "sync_starship_config",
+            "detail": "同步 Starship 配置",
             "type": "process",
             "command": "powershell",
-            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/link_starship_config.ps1"],
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/sync_starship_config.ps1"],
             "group": {
                 "kind": "build",
                 "isDefault": true
