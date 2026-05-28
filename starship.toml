@@ -245,8 +245,5 @@ format = "[$time]($style)"
 use_12hr = true
 style = "none"
 
-[username]
-format = " [$user]($style)"
-
 [zig]
 symbol = " "
